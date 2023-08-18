@@ -1,6 +1,7 @@
 export declare const EnvConfig: {
     DEVELOPMENT: boolean;
     API_BASEURL: string;
+    JWT_SECRET: string;
     DATABASE_TYPE: string;
     DATABASE_HOST: string;
     DATABASE_PORT: number;

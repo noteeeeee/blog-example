@@ -11,6 +11,7 @@ exports.EnvConfig = {
     DEVELOPMENT: process.env.NODE_ENV == 'development',
     // Domains
     API_BASEURL: env.get("API_BASEURL").required().asString(),
+    JWT_SECRET: env.get("JWT_SECRET").required().asString(),
     // Database
     DATABASE_TYPE: env.get("DATABASE_TYPE").default("mysql").asString(),
     DATABASE_HOST: env.get("DATABASE_HOST").default("127.0.0.1").asString(),
