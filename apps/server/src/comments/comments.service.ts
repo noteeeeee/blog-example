@@ -24,7 +24,7 @@ export class CommentsService {
       article: { uuid: article.uuid },
       content: body.content,
     });
-    return instanceToPlain(new CommentResponseDto(comment));
+    return new CommentResponseDto(comment);
   }
 
   async findByArticleUUID(uuid: string) {

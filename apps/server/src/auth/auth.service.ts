@@ -7,7 +7,6 @@ import { AuthUserDto, LoginDto, RegisterDto } from './dto';
 import { UsersService } from 'src/users/users.service';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
-import { instanceToPlain } from 'class-transformer';
 import { JWTPayload } from './types';
 
 @Injectable()
@@ -25,7 +24,7 @@ export class AuthService {
       throw new NotFoundException();
 
     const accessToken = this.jwtService.sign({ uuid: user.uuid } as JWTPayload);
-    return instanceToPlain(new AuthUserDto(user, accessToken));
+    return new AuthUserDto(user, accessToken);
   }
 
   async register(body: RegisterDto) {
@@ -39,6 +38,6 @@ export class AuthService {
     });
     const accessToken = this.jwtService.sign({ uuid: user.uuid } as JWTPayload);
 
-    return instanceToPlain(new AuthUserDto(user, accessToken));
+    return new AuthUserDto(user, accessToken);
   }
 }

@@ -5,6 +5,8 @@ import { EnvConfig } from '@app/config';
 import { JwtStrategy } from './strategies/jwt.strategy';
 import { APP_GUARD } from '@nestjs/core';
 import { AppAuthGuard } from './auth.guard';
+import { AuthService } from './auth.service';
+import { AuthController } from './auth.controller';
 
 @Module({
   imports: [
@@ -15,11 +17,13 @@ import { AppAuthGuard } from './auth.guard';
     }),
   ],
   providers: [
+    AuthService,
     JwtStrategy,
     {
       provide: APP_GUARD,
       useClass: AppAuthGuard,
     },
   ],
+  controllers: [AuthController]
 })
 export class AuthModule {}
