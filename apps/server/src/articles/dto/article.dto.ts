@@ -16,11 +16,26 @@ export class ArticleRequestDto implements Partial<Article> {
   @ApiProperty()
   @Expose()
   @IsString()
+  shortContent: string;
+
+  @ApiProperty()
+  @Expose()
+  @IsString()
   content: string;
 }
 
 @Exclude()
 export class ArticleResponseDto {
+  @ApiProperty()
+  @Expose()
+  @IsString()
+  title: string;
+
+  @ApiProperty()
+  @Expose()
+  @IsString()
+  shortContent: string;
+
   @Expose()
   @ApiProperty()
   content: string;

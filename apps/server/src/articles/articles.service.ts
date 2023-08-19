@@ -42,7 +42,8 @@ export class ArticlesService {
     const article = await this.articlesRepo.save({
       author: { uuid: author.uuid },
       content: body.content,
-      title: body.title
+      title: body.title,
+      shortContent: body.shortContent
     });
 
     return new ArticleResponseDto(article);

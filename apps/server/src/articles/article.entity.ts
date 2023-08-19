@@ -9,6 +9,9 @@ export class Article {
   @Column()
   title: string;
 
+  @Column('text')
+  shortContent: string;
+
   @Column('longtext')
   content: string;
 
