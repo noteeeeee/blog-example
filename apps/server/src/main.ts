@@ -11,6 +11,7 @@ async function bootstrap() {
 
   const config = new DocumentBuilder()
     .setTitle('Open API')
+    .addBearerAuth()
     .setVersion('1.0')
     .build();
 

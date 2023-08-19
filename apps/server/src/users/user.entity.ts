@@ -9,10 +9,10 @@ export class User {
     username: string
 
     @Column({ nullable: true })
-    isAdmin: string
+    isAdmin: boolean
 
     @Column()
-    password: string
+    password?: string
 
     @CreateDateColumn()
     created: Date

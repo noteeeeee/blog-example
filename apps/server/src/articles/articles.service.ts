@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Article } from './article.entity';
 import { Repository } from 'typeorm';
@@ -8,9 +8,8 @@ import {
   PaginateQuery,
   paginate,
 } from 'nestjs-paginate';
-import { ArticleRequestDto, ArticleResponseDto } from './dto';
+import { ArticleRequestDto, ArticleResponseDto, ArticlesPaginatedDto } from './dto';
 import { User } from 'src/users';
-import { instanceToPlain } from 'class-transformer';
 
 @Injectable()
 export class ArticlesService {
@@ -29,11 +28,7 @@ export class ArticlesService {
       },
     });
 
-    paginated.data = paginated.data.map((item) =>
-      instanceToPlain(new ArticleResponseDto(item)) as any,
-    );
-
-    return paginated
+    return new ArticlesPaginatedDto(paginated)
   }
 
   async findByUUID(uuid: string) {
@@ -46,9 +41,21 @@ export class ArticlesService {
   async create(author: User, body: ArticleRequestDto) {
     const article = await this.articlesRepo.save({
       author: { uuid: author.uuid },
-      comment: body.content,
+      content: body.content,
+      title: body.title
     });
 
     return new ArticleResponseDto(article);
+  }
+
+  async delete(uuid: string) {
+    await this.articlesRepo.delete({ uuid })
+  }
+
+  async update(uuid: string, body: ArticleRequestDto) {
+    const article = await this.findByUUID(uuid)
+    if (!article) throw new NotFoundException()
+    await this.articlesRepo.update({ uuid }, body)
+    return new ArticleResponseDto(Object.assign(article, body))
   }
 }

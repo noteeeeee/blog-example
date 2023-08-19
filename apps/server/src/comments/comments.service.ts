@@ -32,6 +32,9 @@ export class CommentsService {
       where: {
         article: { uuid },
       },
+      order: {
+        created: "DESC"
+      },
       relations: ['author'],
     });
 
