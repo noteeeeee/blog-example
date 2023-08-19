@@ -3,10 +3,17 @@ import { ArticlesService } from './articles.service';
 import { ArticleRequestDto, ArticleResponseDto } from './dto';
 import { CurrentUser, User } from 'src/users';
 import { Public } from 'src/auth';
+import { Paginate, PaginateQuery } from 'nestjs-paginate';
 
 @Controller('articles')
 export class ArticlesController {
   constructor(private readonly articlesService: ArticlesService) {}
+
+  @Public()
+  @Get()
+  async find(@Paginate() query: PaginateQuery) {
+    return this.articlesService.find(query)
+  }
 
   @Post()
   create(@CurrentUser() user: User, @Body() body: ArticleRequestDto) {
