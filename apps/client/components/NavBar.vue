@@ -3,14 +3,14 @@
     <div
       class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4"
     >
-      <nux-link to="/" class="flex items-center">
+      <nuxt-link to="/" class="flex items-center">
         <span class="self-center text-2xl font-semibold whitespace-nowrap"
           >Blog</span
         >
-      </nux-link>
+      </nuxt-link>
       <div class="flex md:order-2">
         <nuxt-link
-          to="/login"
+          to="/auth/login"
           class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center mr-3 md:mr-0"
         >
           Login
