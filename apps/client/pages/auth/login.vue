@@ -1,6 +1,6 @@
 <template>
-  <client-only>
-    <div class="w-full flex flex-col items-center">
+  <div class="w-full flex flex-col items-center">
+    <client-only>
       <div
         v-if="toast"
         class="flex items-center w-full max-w-sm p-4 mb-4 text-gray-500 bg-white rounded-lg shadow"
@@ -108,16 +108,20 @@
           </div>
         </form>
       </div>
-    </div>
-  </client-only>
+    </client-only>
+  </div>
 </template>
 
 <script setup lang="ts">
 import { useVuelidate } from "@vuelidate/core";
 import { required, minLength, maxLength } from "@vuelidate/validators";
 
+useHead({
+  title: "Sign in"
+})
+
 const { login: loginStore } = useAccountStore();
-const router = useRouter()
+const router = useRouter();
 
 const toast = ref(false);
 const loading = ref(false);
@@ -142,7 +146,7 @@ async function login() {
   if (correct) {
     try {
       await loginStore(state.username!, state.password!);
-      router.push("/")
+      router.push("/");
     } catch (e) {
       toast.value = true;
     }

@@ -1,6 +1,6 @@
 <template>
-  <client-only>
-    <dic class="w-full flex flex-col items-center">
+  <div class="w-full flex flex-col items-center">
+    <client-only>
       <div
         v-if="toast"
         class="flex items-center w-full max-w-sm p-4 mb-4 text-gray-500 bg-white rounded-lg shadow"
@@ -72,13 +72,13 @@
           </div>
           <div>
             <label
-              for="password"
+              for="passwordConfirm"
               class="block mb-2 text-sm font-medium text-gray-900"
               >Confirm password</label
             >
             <input
               type="password"
-              id="password"
+              id="passwordConfirm"
               v-model="$v.passwordConfirm.$model"
               placeholder="••••••••"
               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
@@ -128,16 +128,20 @@
           </div>
         </form>
       </div>
-    </dic>
-  </client-only>
+    </client-only>
+  </div>
 </template>
 
 <script setup lang="ts">
 import { useVuelidate } from "@vuelidate/core";
 import { required, minLength, maxLength, sameAs } from "@vuelidate/validators";
 
+useHead({
+  title: "Sign up"
+})
+
 const { register: registerStore } = useAccountStore();
-const router = useRouter()
+const router = useRouter();
 
 const toast = ref(false);
 const loading = ref(false);
@@ -171,7 +175,7 @@ async function register() {
         state.password!,
         state.passwordConfirm!
       );
-      router.push("/")
+      router.push("/");
     } catch (e) {
       toast.value = true;
     }
