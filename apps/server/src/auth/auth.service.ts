@@ -23,7 +23,7 @@ export class AuthService {
     if (bcrypt.compareSync(body.password, body.password))
       throw new NotFoundException();
 
-    const accessToken = this.jwtService.sign({ uuid: user.uuid } as JWTPayload);
+    const accessToken = this.jwtService.sign({ sub: user.uuid } as JWTPayload);
     return new AuthUserDto(user, accessToken);
   }
 
@@ -36,7 +36,7 @@ export class AuthService {
       username: body.username,
       password: passwordHash,
     });
-    const accessToken = this.jwtService.sign({ uuid: user.uuid } as JWTPayload);
+    const accessToken = this.jwtService.sign({ sub: user.uuid } as JWTPayload);
 
     return new AuthUserDto(user, accessToken);
   }

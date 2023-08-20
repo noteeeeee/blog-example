@@ -12,9 +12,8 @@ export const useAccountStore = defineStore("account", {
           .get("/auth/me")
           .then((res) => res.data);
         this.loggedIn = true;
-      } catch (e) {
-        this.isLoading = false;
-      }
+      } catch {}
+      this.isLoading = false;
     },
     async logout() {
       this.account = null;
@@ -22,19 +21,23 @@ export const useAccountStore = defineStore("account", {
       localStorage.removeItem("accessToken");
     },
     async login(username: string, password: string) {
+      this.isLoading = true;
       const data = await useAxiosInstance()
         .post("/auth/login", { username, password })
         .then((res) => res.data as any);
       this.loggedIn = true;
-      this.account = data.account;
+      this.account = data.user;
+      this.isLoading = false;
       localStorage.setItem("accessToken", data.accessToken);
     },
-    async register(username: string, password: string) {
+    async register(username: string, password: string, passwordConfirm: string) {
+      this.isLoading = true;
       const data = await useAxiosInstance()
-        .post("/auth/register", { username, password })
+        .post("/auth/register", { username, password, passwordConfirm })
         .then((res) => res.data as any);
       this.loggedIn = true;
-      this.account = data.account;
+      this.account = data.user;
+      this.isLoading = false;
       localStorage.setItem("accessToken", data.accessToken);
     },
   },

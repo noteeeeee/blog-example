@@ -1,3 +1,3 @@
 export interface JWTPayload {
-    uuid: string
+    sub: string
 }
