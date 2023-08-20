@@ -1,7 +1,7 @@
 <template>
   <nav class="bg-white fixed w-full z-20 top-0 left-0 border-b border-gray-200">
     <div
-      class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4"
+      class="container flex flex-wrap items-center justify-between mx-auto p-4"
     >
       <nuxt-link to="/" class="flex items-center">
         <span class="self-center text-2xl font-semibold whitespace-nowrap"
@@ -81,5 +81,11 @@
 
 <script setup lang="ts">
 const { account } = storeToRefs(useAccountStore());
-const { logout } = useAccountStore();
+const { logout: logoutStore } = useAccountStore();
+const router = useRouter()
+
+function logout() {
+  logoutStore()
+  router.push("/")
+}
 </script>

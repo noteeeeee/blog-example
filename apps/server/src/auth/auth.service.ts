@@ -20,7 +20,7 @@ export class AuthService {
     const user = await this.usersService.findByUsername(body.username);
     if (!user) throw new NotFoundException();
 
-    if (bcrypt.compareSync(body.password, body.password))
+    if (!bcrypt.compareSync(body.password, user.password))
       throw new NotFoundException();
 
     const accessToken = this.jwtService.sign({ sub: user.uuid } as JWTPayload);

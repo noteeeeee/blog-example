@@ -1,3 +1,5 @@
 <template>
-  <div class=""></div>
+  <div class="">
+    <Editor />
+  </div>
 </template>
