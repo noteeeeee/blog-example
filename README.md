@@ -44,12 +44,6 @@ To get started with the application, follow these steps:
 pnpm sync
 ```
 
-8. Install PM2 (if not already installed, only for production-mode):
-
-   ```sh
-   npm install -g pnpm
-   ```
-
 ## Developer mode
 
 Once the dependencies are installed, you can start the application using the following command:
@@ -66,7 +60,7 @@ Visit the appropriate URL in your web browser to access Swagger Docs `http://loc
 Once the dependencies are installed, you can start the application using the following command:
 
 ```sh
-pm2 start ./ecosystem.js
+pnpm start
 ```
 
 Visit the appropriate URL in your web browser to access Swagger Docs `http://localhost:3001/docs`.
