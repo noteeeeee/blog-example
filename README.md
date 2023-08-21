@@ -40,9 +40,9 @@ To get started with the application, follow these steps:
 
 7. Sync with Database (only for production-mode)
 
-```sh
-pnpm sync
-```
+   ```sh
+   pnpm sync
+   ```
 
 ## Configuring .env
 
