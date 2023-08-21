@@ -55,13 +55,13 @@
         id="navbar-sticky"
       >
         <ul
-          class="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white"
+          class="navbar flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white"
         >
           <client-only>
             <li>
               <nuxt-link
                 to="/"
-                class="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0"
+                class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0"
                 >Home</nuxt-link
               >
             </li>
@@ -78,6 +78,20 @@
     </div>
   </nav>
 </template>
+
+<style>
+.navbar li:not(:first-of-type) > .router-link-active {
+  @apply bg-blue-700 text-white md:text-blue-700 md:bg-transparent;
+}
+
+.navbar li:first-of-type >.router-link-exact-active {
+  @apply bg-blue-700 text-white md:text-blue-700 md:bg-transparent;
+}
+/* exact link will show the primary color for only the exact matching link */
+/* a.nuxt-link-exact-active {
+  color: #00c58e;
+} */
+</style>
 
 <script setup lang="ts">
 const { account } = storeToRefs(useAccountStore());

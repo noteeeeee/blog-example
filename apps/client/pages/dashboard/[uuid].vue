@@ -1,9 +1,7 @@
 <template>
   <section class="bg-white">
-    <div class="py-8 px-4 mx-auto max-w-2xl lg:py-16">
-      <h2
-        class="mb-4 text-xl font-bold text-gray-900 flex items-center gap-2"
-      >
+    <div v-if="!isLoading" class="py-8 px-4 mx-auto max-w-2xl lg:py-16">
+      <h2 class="mb-4 text-xl font-bold text-gray-900flex items-center gap-2">
         <nuxt-link
           to="/dashboard"
           class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300"
@@ -24,9 +22,9 @@
             />
           </svg>
         </nuxt-link>
-        Create new article
+        Edit article
       </h2>
-      <form @submit.prevent="createExec()" action="#">
+      <form @submit.prevent="editExec()" action="#">
         <div class="flex flex-col gap-6">
           <error-alert
             class="col-span-2"
@@ -58,7 +56,7 @@
             v-model="$v.content.$model"
           />
           <button-with-loading
-            label="Publish article"
+            label="Edit article"
             type="submit"
             :loading="loading"
           />
@@ -76,6 +74,12 @@ useHead({
   title: "Create article",
 });
 
+const route = useRoute();
+const { execute, isLoading } = useAxios(
+  `/articles/${route.params.uuid}`,
+  undefined,
+  { immediate: false }
+);
 const router = useRouter();
 const loading = ref(false);
 const toast = ref(false);
@@ -98,11 +102,11 @@ const rules = {
 };
 const $v = useVuelidate(rules, state);
 
-async function create() {
+async function edit() {
   const correct = await $v.value.$validate();
   if (correct) {
     try {
-      await useAxiosPost("/articles", { data: state });
+      await useAxiosPatch(`/articles/${route.params.uuid}`, { data: state });
       router.push("/dashboard");
     } catch (e) {
       toast.value = true;
@@ -112,9 +116,19 @@ async function create() {
   loading.value = false;
 }
 
-const debounceCreate = useDebounceFn(create, 100);
-const createExec = () => {
+const debounceEdit = useDebounceFn(edit, 100);
+const editExec = () => {
   loading.value = true;
-  debounceCreate();
+  debounceEdit();
 };
+
+onMounted(() =>
+  execute().then(({ data, error }: any) => {
+    if (data.value) {
+      state.content = data.value.content;
+      state.shortContent = data.value.shortContent;
+      state.title = data.value.title;
+    }
+  }).catch(() => showError({ statusCode: 404 }))
+);
 </script>

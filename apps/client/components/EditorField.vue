@@ -4,7 +4,7 @@
       <label class="block mb-2 text-sm font-medium text-gray-900">{{
         label
       }}</label>
-      <QuillEditor @update:content="onEditorChange($event)" content-type="html" />
+      <QuillEditor :content="data" @update:content="onEditorChange($event)" content-type="html" />
       <small class="text-red-500" v-for="error in errors" :key="error.$uid">{{
         error.$message
       }}</small>

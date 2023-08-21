@@ -3,7 +3,7 @@
     <li>
       <button
         @click="emit('page', meta.currentPage - 1)"
-        :disabled="meta.currentPage == 1 && props.loading"
+        :disabled="meta.currentPage == 1 || props.loading"
         class="flex items-center justify-center px-3 h-8 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700"
       >
         <svg
@@ -41,7 +41,7 @@
     <li>
       <button
         @click="emit('page', meta.currentPage + 1)"
-        :disabled="meta.currentPage == meta.totalPages && props.loading"
+        :disabled="meta.currentPage == meta.totalPages || props.loading"
         class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700"
       >
         <svg

@@ -33,7 +33,7 @@ export class CommentsService {
         article: { uuid },
       },
       order: {
-        created: "DESC"
+        created: "ASC"
       },
       relations: ['author'],
     });

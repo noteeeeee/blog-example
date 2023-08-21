@@ -1,7 +1,11 @@
 <template>
   <div class="w-full flex flex-col items-center">
     <client-only>
-      <error-alert class="max-w-sm mb-4" v-if="toast" content="Invalid login or password" />
+      <error-alert
+        class="max-w-sm mb-4"
+        v-if="toast"
+        content="Invalid login or password"
+      />
       <div
         class="w-full max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8"
       >
@@ -26,6 +30,7 @@
             placeholder="••••••••"
           />
           <button-with-loading
+            class="w-full"
             label="Sign in to account"
             type="submit"
             :loading="loading"
