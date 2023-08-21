@@ -22,6 +22,7 @@ export class ArticlesService {
     const paginated = await paginate(query, this.articlesRepo, {
       sortableColumns: ['created'],
       defaultSortBy: [['created', 'DESC']],
+      defaultLimit: 10,
       filterableColumns: {
         name: [FilterOperator.EQ, FilterSuffix.NOT],
         age: true,

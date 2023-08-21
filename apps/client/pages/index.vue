@@ -1,103 +1,54 @@
 <template>
   <div>
-   <ArticleCard />
-   <ArticleCard />
-   <ArticleCard />
-   <ArticleCard />
-   <ArticleCard />
-   <ArticleCard />
-   <ArticleCard />
-   <ArticleCard />
-   <ArticleCard />
-   <ArticleCard />
-
-    <ul class="flex items-center -space-x-px h-8 text-sm w-full">
-      <li>
-        <a
-          href="#"
-          class="flex items-center justify-center px-3 h-8 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700"
-        >
-          <svg
-            class="w-2.5 h-2.5"
-            aria-hidden="true"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 6 10"
-          >
-            <path
-              stroke="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M5 1 1 5l4 4"
-            />
-          </svg>
-        </a>
-      </li>
-      <li>
-        <a
-          href="#"
-          class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700"
-          >1</a
-        >
-      </li>
-      <li>
-        <a
-          href="#"
-          class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700"
-          >2</a
-        >
-      </li>
-      <li>
-        <a
-          href="#"
-          aria-current="page"
-          class="z-10 flex items-center justify-center px-3 h-8 leading-tight text-blue-600 border border-blue-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700"
-          >3</a
-        >
-      </li>
-      <li>
-        <a
-          href="#"
-          class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700"
-          >4</a
-        >
-      </li>
-      <li>
-        <a
-          href="#"
-          class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700"
-          >5</a
-        >
-      </li>
-      <li>
-        <a
-          href="#"
-          class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700"
-        >
-          <svg
-            class="w-2.5 h-2.5"
-            aria-hidden="true"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 6 10"
-          >
-            <path
-              stroke="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="m1 9 4-4-4-4"
-            />
-          </svg>
-        </a>
-      </li>
-    </ul>
+    <div v-if="paginated">
+      <ArticleCard v-for="article in paginated.data" :item="article" :key="article.uuid" />
+    </div>
+  </div>
+  <div class="flex justify-between items-center">
+    <Paginator
+      v-if="paginated"
+      :loading="isLoading"
+      @page="onPage"
+      :meta="paginated?.meta"
+      :total-pages="5"
+    />
+    <svg
+      v-show="isLoading"
+      class="animate-spin -ml-1 mr-3 h-6 w-6 text-blue-700"
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+    >
+      <circle
+        class="opacity-25"
+        cx="12"
+        cy="12"
+        r="10"
+        stroke="currentColor"
+        stroke-width="4"
+      ></circle>
+      <path
+        class="opacity-75"
+        fill="currentColor"
+        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+      ></path>
+    </svg>
   </div>
 </template>
 
 <script setup lang="ts">
 useHead({
-  title: ""
-})
+  title: "",
+});
+
+const { data: paginated, isLoading, execute } = useAxios<any>("/articles");
+const debouncePaginate = useDebounceFn(
+  (page: number) => execute({ params: { page } }),
+  500
+);
+
+function onPage(page: number) {
+  isLoading.value = true;
+  debouncePaginate(page);
+}
 </script>

@@ -1,7 +1,7 @@
 <template>
   <div class="w-full flex flex-col items-center">
     <client-only>
-      <error-alert v-if="toast" content="Invalid login or password" />
+      <error-alert class="max-w-sm mb-4" v-if="toast" content="Invalid login or password" />
       <div
         class="w-full max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8"
       >
@@ -10,6 +10,7 @@
             Sign in to our platform
           </h5>
           <text-field
+            :required="true"
             type="text"
             label="Your username"
             v-model="$v.username.$model"
@@ -17,6 +18,7 @@
             placeholder="Username"
           />
           <text-field
+            :required="true"
             type="password"
             label="Your password"
             v-model="$v.password.$model"

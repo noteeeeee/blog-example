@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex items-center w-full max-w-sm p-4 mb-4 text-gray-500 bg-white rounded-lg shadow"
+    class="flex items-center w-full p-4 text-gray-500 bg-white rounded-lg shadow"
     role="alert"
   >
     <div

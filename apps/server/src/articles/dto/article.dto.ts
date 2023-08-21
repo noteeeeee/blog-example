@@ -29,6 +29,11 @@ export class ArticleResponseDto {
   @ApiProperty()
   @Expose()
   @IsString()
+  uuid: string;
+
+  @ApiProperty()
+  @Expose()
+  @IsString()
   title: string;
 
   @ApiProperty()
