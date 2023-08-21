@@ -2,10 +2,10 @@
   "name": "@app/client",
   "private": true,
   "scripts": {
-    "build": "nuxt generate --no-clear",
+    "build": "nuxt build --no-clear",
     "dev": "nuxt dev --no-clear",
     "generate": "nuxt generate --no-clear",
-    "start": "nuxt preview",
+    "start": "node .output/server/index.mjs",
     "postinstall": "nuxt prepare"
   },
   "devDependencies": {
