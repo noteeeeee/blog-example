@@ -58,8 +58,6 @@ To get started with the application, follow these steps:
 
 - **DATABASE_NAME**: This is the name of the MySQL database that the application is connecting to. In this case, it's set to `app`.
 
-These environment variables are often used to store configuration settings separately from the codebase. This practice allows you to change settings without modifying the code directly, making it easier to manage configurations for different environments (development, production, etc.). It's important to keep sensitive information (like passwords and secrets) in environment variables and not hardcode them in the codebase for security reasons.
-
 ## Developer mode
 
 Once the dependencies are installed, you can start the application using the following command:
