@@ -38,7 +38,7 @@ To get started with the application, follow these steps:
 
 6. Rename `.env.example` to `.env` and edit
 
-7.Sync with Database (only for production-mode)
+7. Sync with Database (only for production-mode)
 
 ```sh
 pnpm sync
