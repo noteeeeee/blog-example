@@ -10,6 +10,7 @@ export const EnvConfig = {
   DEVELOPMENT: process.env.NODE_ENV == 'development',
 
   // Domains
+  APP_BASEURL: env.get("APP_BASEURL").required().asString(),
   API_BASEURL: env.get("API_BASEURL").required().asString(),
   JWT_SECRET: env.get("JWT_SECRET").required().asString(),
 

@@ -8,8 +8,13 @@ import {
   PaginateQuery,
   paginate,
 } from 'nestjs-paginate';
-import { ArticleRequestDto, ArticleResponseDto, ArticlesPaginatedDto } from './dto';
+import {
+  ArticleRequestDto,
+  ArticleResponseDto,
+  ArticlesPaginatedDto,
+} from './dto';
 import { User } from 'src/users';
+import * as _ from 'lodash';
 
 @Injectable()
 export class ArticlesService {
@@ -29,7 +34,12 @@ export class ArticlesService {
       },
     });
 
-    return new ArticlesPaginatedDto(paginated)
+    return new ArticlesPaginatedDto(paginated);
+  }
+
+  async allUUIDs() {
+    const articles = await this.articlesRepo.find({ select: ['uuid'] });
+    return _.map(articles, "uuid")
   }
 
   async findByUUID(uuid: string) {
@@ -44,20 +54,20 @@ export class ArticlesService {
       author: { uuid: author.uuid },
       content: body.content,
       title: body.title,
-      shortContent: body.shortContent
+      shortContent: body.shortContent,
     });
 
     return new ArticleResponseDto(article);
   }
 
   async delete(uuid: string) {
-    await this.articlesRepo.delete({ uuid })
+    await this.articlesRepo.delete({ uuid });
   }
 
   async update(uuid: string, body: ArticleRequestDto) {
-    const article = await this.findByUUID(uuid)
-    if (!article) throw new NotFoundException()
-    await this.articlesRepo.update({ uuid }, body)
-    return new ArticleResponseDto(Object.assign(article, body))
+    const article = await this.findByUUID(uuid);
+    if (!article) throw new NotFoundException();
+    await this.articlesRepo.update({ uuid }, body);
+    return new ArticleResponseDto(Object.assign(article, body));
   }
 }

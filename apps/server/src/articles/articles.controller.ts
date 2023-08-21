@@ -56,6 +56,13 @@ export class ArticlesController {
   }
 
   @Public()
+  @Get('uuids')
+  @ApiOkResponse({ type: String, isArray: true })
+  allUUIDs() {
+    return this.articlesService.allUUIDs()
+  }
+
+  @Public()
   @Get(':uuid')
   @ApiOkResponse({ type: ArticleResponseDto })
   @ApiNotFoundResponse()

@@ -25,6 +25,7 @@
     "sass": "^1.66.0"
   },
   "dependencies": {
+    "@funken-studio/sitemap-nuxt-3": "^4.0.4",
     "@pinia/nuxt": "^0.4.11",
     "dayjs": "^1.11.9",
     "flowbite": "^1.8.1",

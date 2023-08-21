@@ -46,6 +46,8 @@ To get started with the application, follow these steps:
 
 ## Configuring .env
 
+- **APP_BASEURL** is likely used to define the base URL for generating URLs within a sitemap in your application. A sitemap is a file that lists all the pages of a website to help search engines understand the site's structure and content.
+
 - **API_BASEURL**: This environment variable appears to define the base URL for the API. In this case, it's set to `http://127.0.0.1:3001`, which corresponds to the local development server's address (localhost) and port (3001). This variable is likely used by the client-side code to make API requests.
 
 - **JWT_SECRET**: This environment variable seems to hold the secret key used for JSON Web Token (JWT) generation and validation. JWTs are often used for authentication and authorization purposes. The value `12345678` is likely a placeholder, and in a real application, you would want to use a more secure and random string as the JWT secret.
@@ -77,6 +79,6 @@ Once the dependencies are installed, you can start the application using the fol
 pnpm start
 ```
 
+Visit the appropriate URL in your web browser to access the running application `http://localhost:3000`.
 Visit the appropriate URL in your web browser to access Swagger Docs `http://localhost:3001/docs`.
-For the frontend to work it needs to be distributed through a web server (Nginx/Apache).
-You can use Nginx reverse proxy for the backend.
+You can use Nginx reverse proxy for the backend and frontend.

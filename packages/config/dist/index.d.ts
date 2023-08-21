@@ -1,5 +1,6 @@
 export declare const EnvConfig: {
     DEVELOPMENT: boolean;
+    APP_BASEURL: string;
     API_BASEURL: string;
     JWT_SECRET: string;
     DATABASE_TYPE: string;
