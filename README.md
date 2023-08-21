@@ -12,33 +12,27 @@ To get started with the application, follow these steps:
    git clone https://github.com/noteeeeee/blog-example.git
    ```
 
-2. Navigate to the repository directory:
-
-   ```sh
-   cd blog-example
-   ```
-
-3. Install PNPM (if not already installed):
+2. Install PNPM (if not already installed):
 
    ```sh
    npm install -g pnpm
    ```
 
-4. Navigate to the application's directory:
+3. Navigate to the application's directory:
 
    ```sh
    cd ./blog-example-main
    ```
 
-5. Install dependencies using PNPM:
+4. Install dependencies using PNPM:
 
    ```sh
    pnpm install
    ```
 
-6. Rename `.env.example` to `.env` and configure.
+5. Rename `.env.example` to `.env` and configure.
 
-7. Sync with Database (only for production-mode)
+6. Sync with Database (only for production-mode)
 
    ```sh
    pnpm sync
