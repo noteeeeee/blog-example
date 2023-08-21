@@ -36,7 +36,7 @@ To get started with the application, follow these steps:
    pnpm install
    ```
 
-6. Rename `.env.example` to `.env` and edit.
+6. Rename `.env.example` to `.env` and configure.
 
 7. Sync with Database (only for production-mode)
 
